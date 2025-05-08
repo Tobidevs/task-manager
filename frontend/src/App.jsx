@@ -1,8 +1,14 @@
 import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Dashboard from './pages/Dashboard'
+import CreateTask from './pages/CreateTask'
 
 const App = () => {
   return (
-    <div className='bg-red-500'>App</div>
+    <Routes>
+      <Route path='/' element={<Dashboard />}/>
+      <Route path='/createtask' element={<CreateTask />}/>
+    </Routes>
   )
 }
 
