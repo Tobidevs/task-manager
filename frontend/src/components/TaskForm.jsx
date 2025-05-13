@@ -1,15 +1,27 @@
 import {React, useState} from 'react'
+import Tag from './Tag'
 
 const TaskForm = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [tags, setTags] = useState('')
+    const [tagInput, setTagInput] = useState('')
+    const [tags, setTags] = useState([])
 
+    const handleDelete = (tagToDelete) => {
+        setTags(prev => prev.filter(tag => tag !== tagToDelete));
+      };
+
+    const updateTags = () => {
+        setTags((prev) => [...prev, tagInput])
+        setTagInput('')
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name, description, tags);
     }
+
+
 
   return (
     <form type="submit" onSubmit={handleSubmit} className='w-3/12 h-7/12 border border-[#D3D8DE] rounded-xl p-8 flex flex-col gap-6 '>
@@ -37,15 +49,22 @@ const TaskForm = () => {
         </div>
         <div className='flex flex-col gap-2 h-fit w-full'>
             <label>Tags</label>
-            <input
-            type="text"
-            name="name"
-            placeholder="Value"
-            onChange={(e) => setTags(e.target.value)}
-            value={tags}
-            className="border pl-5 pt-2 pb-2 w-full border-[#D3D8DE] rounded-xl"
-            />
-            <div>
+            <div className='flex items-center gap-3'>
+                <input
+                type="text"
+                name="name"
+                placeholder="Value"
+                onChange={(e) => setTagInput(e.target.value)}
+                value={tagInput}
+                className="border pl-5 pt-2 pb-2 w-full border-[#D3D8DE] rounded-xl"
+                />
+                <p className='p-2 bg-gray-300 rounded-full cursor-pointer' onClick={updateTags}>&#43;</p>
+            </div>
+
+            <div className='flex flex-wrap gap-1'>
+                {tags.map((val, index) => (
+                    <Tag value={val} key={index} onDelete={handleDelete}/>
+                ))}
 
             </div>
         </div>

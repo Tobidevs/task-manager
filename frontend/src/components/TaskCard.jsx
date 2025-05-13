@@ -2,6 +2,10 @@ import React from 'react'
 import Tag from './Tag'
 
 const TaskCard = () => {
+    const handleDelete = (tagToDelete) => {
+        setTags(prev => prev.filter(tag => tag !== tagToDelete));
+      };
+      // Todo: inplement data to card
   return (
     <div className='w-full h-fit border border-[#D3D8DE] rounded-2xl pl-3 pr-3 pt-3 pb-2 flex flex-col gap-2'>
         <div className='w-full h-3/8 flex items-center justify-between'>
@@ -12,10 +16,8 @@ const TaskCard = () => {
             
             <div className='rounded-full h-3 w-3 bg-[#6F6F6F] mr-2'></div>
         </div>
-        {/* <p className='text-sm'>Track expenses from bank accounts and track money</p> */}
         <div className='flex gap-1'>
-            <Tag />
-            <Tag />
+            
         </div>
     </div>
   )
