@@ -3,7 +3,10 @@ import {PORT, mongodbURL} from './config.js'
 import mongoose from 'mongoose';
 const app = express();
 
+app.use(express.json());
 
+// Middleware for handling CORS policy 
+app.use(cors())
 
 app.listen(PORT, () => {
     console.log("Server is running")
