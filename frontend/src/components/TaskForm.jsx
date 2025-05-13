@@ -7,7 +7,7 @@ const TaskForm = () => {
     const [tagInput, setTagInput] = useState('')
     const [tags, setTags] = useState([])
 
-    const handleDelete = (tagToDelete) => {
+    const deleteTag = (tagToDelete) => {
         setTags(prev => prev.filter(tag => tag !== tagToDelete));
       };
 
@@ -63,7 +63,7 @@ const TaskForm = () => {
 
             <div className='flex flex-wrap gap-1'>
                 {tags.map((val, index) => (
-                    <Tag value={val} key={index} onDelete={handleDelete}/>
+                    <Tag value={val} key={index} onDelete={deleteTag}/>
                 ))}
 
             </div>
