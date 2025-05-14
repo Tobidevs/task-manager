@@ -40,10 +40,20 @@ taskRouter.get('/:id', getTask, (req, res, next) => {
 })
 
 // Update task from DB
-taskRouter.patch('/', (req, res, next) => {
-    if (!req.body.name != null) {
-        req.body.name = req.body.name
+taskRouter.patch('/:id', getTask, async (req, res, next) => {
+    if (req.body.name != null) {
+        res.task.name = req.body.name
     }
+    if (req.body.description != null) {
+        res.task.description = req.body.description
+    }
+    try {
+        const updatedTask = await res.task.save()
+        res.status(200).json(updatedTask)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+
 })
 
 // Delete task from DB
