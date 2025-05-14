@@ -1,12 +1,17 @@
 import express from 'express';
 import {PORT, mongodbURL} from './config.js'
 import mongoose from 'mongoose';
+import cors from 'cors'
+import { taskRouter } from './routes/taskRoutes.js';
+
 const app = express();
 
 app.use(express.json());
 
 // Middleware for handling CORS policy 
 app.use(cors())
+
+app.use('/tasks', taskRouter)
 
 app.listen(PORT, () => {
     console.log("Server is running")

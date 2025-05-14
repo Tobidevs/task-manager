@@ -6,8 +6,8 @@ import CreateTask from './pages/CreateTask'
 const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Dashboard />}/>
-      <Route path='/createtask' element={<CreateTask />}/>
+      <Route path='/tasks' element={<Dashboard />}/>
+      <Route path='/tasks/createtask' element={<CreateTask />}/>
     </Routes>
   )
 }
