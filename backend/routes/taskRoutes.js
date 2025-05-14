@@ -34,3 +34,39 @@ taskRouter.get('/', async (req, res, next) => {
     }
 })
 
+// Get one task from DB
+taskRouter.get('/:id', getTask, (req, res, next) => {
+    res.json(res.task)
+})
+
+// Update task from DB
+taskRouter.patch('/', (req, res, next) => {
+    if (!req.body.name != null) {
+        req.body.name = req.body.name
+    }
+})
+
+// Delete task from DB
+taskRouter.delete('/:id', getTask, async(req, res, next) => {
+    try {
+        await res.task.deleteOne()
+        res.json({ message: 'Deleted task' })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
+// Get task by ID
+async function getTask(req, res, next) {
+    let task
+    try {
+        task = await TaskModel.findById(req.params.id)
+        if (!task) {
+            return res.status(404).json({ message: 'Cannot find task' })
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+    res.task = task
+    next()
+}
