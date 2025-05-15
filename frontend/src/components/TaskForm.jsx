@@ -1,4 +1,5 @@
 import {React, useState} from 'react'
+import axios from 'axios'
 import Tag from './Tag'
 
 const TaskForm = () => {
@@ -16,9 +17,21 @@ const TaskForm = () => {
         setTagInput('')
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(name, description, tags);
+        try {
+            const response = await axios.post('http://localhost:5555/tasks', {
+                name: name,
+                description: description,
+                tags: tags
+            })
+            console.log('Success:', response.data)
+            setName('')
+            setDescription('')
+            setTags([])
+        } catch (error) {
+            console.error('Error sending data:', error)
+        }
     }
 
 
