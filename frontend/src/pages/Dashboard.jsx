@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TitleBar from '../components/TitleBar'
 import SideBar from '../components/SideBar'
 import TaskCard from '../components/TaskCard'
+import axios from 'axios'
 
 const Dashboard = () => {
-  
+  const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:5555/tasks')
+    .then(res => setTasks(res.data.data))
+    .catch(err => console.error(err))
+  }, [])
+
+
   return (
     <div className='bg-[#F0F4FF] h-screen w-screen'>
       <TitleBar />
@@ -21,7 +30,12 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className='h-11/12 w-full pr-5 pl-5 flex flex-col gap-4'>
-                <TaskCard />
+                
+                {
+                  tasks && tasks.map((task) => (
+                    <TaskCard task={task} key={task._id}/>
+                  )) 
+                }
                 
                 
                 

@@ -2,11 +2,14 @@ import {React, useState} from 'react'
 import axios from 'axios'
 import Tag from './Tag'
 
+
+
 const TaskForm = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [tagInput, setTagInput] = useState('')
     const [tags, setTags] = useState([])
+    const [message, setMessage] = useState('')
 
     const deleteTag = (tagToDelete) => {
         setTags(prev => prev.filter(tag => tag !== tagToDelete));
@@ -29,6 +32,8 @@ const TaskForm = () => {
             setName('')
             setDescription('')
             setTags([])
+            setMessage('Created Task Successfully!')
+            setTimeout(() => setMessage(''), 5000)
         } catch (error) {
             console.error('Error sending data:', error)
         }
@@ -82,7 +87,11 @@ const TaskForm = () => {
             </div>
         </div>
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-xl cursor-pointer">Submit</button>
-        
+        {message && (
+        <div className="bg-green-200 text-green-800 flex items-center justify-center p-2 rounded-xl mb-2">
+          {message}
+        </div>
+      )}
             
     </form>
   )
