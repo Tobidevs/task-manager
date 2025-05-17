@@ -2,8 +2,6 @@ import {React, useState} from 'react'
 import axios from 'axios'
 import Tag from './Tag'
 
-
-
 const TaskForm = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -81,7 +79,7 @@ const TaskForm = () => {
 
             <div className='flex flex-wrap gap-1'>
                 {tags.map((val, index) => (
-                    <Tag value={val} key={index} onDelete={deleteTag}/>
+                    <Tag tagName={val} key={index} onDelete={deleteTag}/>
                 ))}
 
             </div>

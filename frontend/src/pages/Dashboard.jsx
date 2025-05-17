@@ -7,11 +7,24 @@ import axios from 'axios'
 const Dashboard = () => {
   const [tasks, setTasks] = useState([])
 
-  useEffect(() => {
+  const fetchTasks = () => {
     axios.get('http://localhost:5555/tasks')
-    .then(res => setTasks(res.data.data))
-    .catch(err => console.error(err))
-  }, [])
+      .then(res => setTasks(res.data.data)) 
+      .catch(err => console.error(err));
+  }
+
+  const handleTagDelete = async (newTags, taskId) => {
+    try {
+      await axios.patch(`http://localhost:5555/tasks/${taskId}`, { tags: newTags })
+      fetchTasks()
+    } catch (error) {
+      console.error('Error updating task:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
 
   return (
@@ -33,7 +46,7 @@ const Dashboard = () => {
                 
                 {
                   tasks && tasks.map((task) => (
-                    <TaskCard task={task} key={task._id}/>
+                    <TaskCard task={task} onTagDelete={handleTagDelete} key={task._id}/>
                   )) 
                 }
                 

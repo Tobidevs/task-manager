@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Tag from './Tag'
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, onTagDelete }) => {
     const { name, description, tags } = task
     const [showDescription, setShowDescription] = useState(false);
 
@@ -9,8 +9,9 @@ const TaskCard = ({ task }) => {
         setShowDescription(prev => !prev);
     };
 
-    const handleDelete = (tag) => {
-        const newTags = tags.filter()
+    const handleDelete = (tagToRemove) => {
+        const newTags = tags.filter(tag => tag != tagToRemove)
+        onTagDelete(newTags, task._id)
     }
     
   return (
