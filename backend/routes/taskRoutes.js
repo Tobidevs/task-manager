@@ -47,6 +47,9 @@ taskRouter.patch('/:id', getTask, async (req, res, next) => {
     if (req.body.description != null) {
         res.task.description = req.body.description
     }
+    if (req.body.tags != null) {
+        res.task.tags = req.body.tags
+    }
     try {
         const updatedTask = await res.task.save()
         res.status(200).json(updatedTask)
