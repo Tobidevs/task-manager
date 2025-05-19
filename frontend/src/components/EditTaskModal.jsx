@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Tag from "./Tag";
+import { IoMenu } from "react-icons/io5";
 
-const EditTaskModal = ({ task, onClose, onUpdate }) => {
+const EditTaskModal = ({ task, onClose, onUpdate, onDelete }) => {
   const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description);
   const [tagInput, setTagInput] = useState("");
@@ -36,12 +37,14 @@ const EditTaskModal = ({ task, onClose, onUpdate }) => {
       <div className="bg-[#F0F4FF] p-8 rounded-xl shadow-lg w-3/8 h-3/5 flex flex-col justify-center">
         <div className="flex w-full justify-center  h-1/10 relative">
           <h1 className="text-[#2C2C2C] font-semibold text-3xl ">Edit Task</h1>
+          <div className="absolute left-0 text-red-500 cursor-pointer" onClick={() => onDelete(task)}>Delete Task</div>
           <div
             className="absolute right-0 text-4xl cursor-pointer"
             onClick={() => onClose()}
           >
             &times;
           </div>
+          
         </div>
         <form className="h-9/10 flex flex-col gap-6" onSubmit={handleUpdate}>
           <div className="flex flex-col gap-2 h-fit w-full">

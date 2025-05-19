@@ -19,6 +19,17 @@ const Dashboard = () => {
     setSelectedTask(null)
     setShowModal(false)
   }
+
+  const handleDelete = (task) => {
+    try {
+      axios.delete(`http://localhost:5555/tasks/${task._id}`)
+      closeEditModal()
+      fetchTasks()
+    } catch (error) {
+      console.error()
+    }
+  }
+
   const fetchTasks = () => {
     axios.get('http://localhost:5555/tasks')
       .then(res => setTasks(res.data.data)) 
@@ -47,7 +58,7 @@ const Dashboard = () => {
         <div className='w-6/7'>
         {
           showModal && selectedTask && (
-            <EditTaskModal task={selectedTask} onClose={closeEditModal} onUpdate={fetchTasks} />
+            <EditTaskModal task={selectedTask} onClose={closeEditModal} onUpdate={fetchTasks} onDelete={handleDelete}/>
           )
         }
           <div className='h-1/11 w-full text-[#2C2C2C] font-semibold text-3xl flex items-center pl-20'>My Tasks</div>
