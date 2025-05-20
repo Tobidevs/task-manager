@@ -31,17 +31,27 @@ const TaskCard = ({ task, onTagDelete, onEdit, changeStatus }) => {
         </div>
         <div className="flex items-center gap-2">
           <button onClick={() => onEdit(task)} className="cursor-pointer">
-            <MdModeEditOutline className="text-xl text-[#2C2C2C]"/>
+            <MdModeEditOutline className="text-xl text-[#2C2C2C]" />
           </button>
           <div className="relative group inline-block">
             <div className="rounded-full h-4 w-4 bg-[#6F6F6F] mr-2 cursor-pointer"></div>
-            <div className="w-50 h-20 border bg-[#F0F4FF] hidden group-hover:block absolute border-[#D3D8DE] rounded-2xl pl-2 pt-1 pb-3">
+            <div className="border bg-[#F0F4FF] hidden group-hover:block absolute border-[#D3D8DE] rounded-2xl pl-2 pt-1 pb-3 pr-2">
               <label className="text-sm text-gray-500">Set Status</label>
-              <div className="flex items-center pr-3 pl-3 cursor-pointer" onClick={() => changeStatus(task, 'In progress')}>
+              <div className="flex items-center pr-3 pl-3 cursor-pointer" onClick={() => changeStatus(task, 'incomplete')}>
+                <div className="rounded-full h-3 w-3 bg-[#6F6F6F] mr-2"></div>
+                <div className="font-medium">Incomplete</div>
+              </div>
+              <div
+                className="flex items-center pr-3 pl-3 cursor-pointer"
+                onClick={() => changeStatus(task, "in progress")}
+              >
                 <div className="rounded-full h-3 w-3 bg-[#5F99DF] mr-2"></div>
                 <div className="font-medium">In progress</div>
               </div>
-              <div className="flex items-center pr-3 pl-3 cursor-pointer" onClick={() => changeStatus(task, 'Completed')}>
+              <div
+                className="flex items-center pr-3 pl-3 cursor-pointer"
+                onClick={() => changeStatus(task, "completed")}
+              >
                 <div className="rounded-full h-3 w-3 bg-[#3CD08B] mr-2"></div>
                 <div className="font-medium">Completed</div>
               </div>
