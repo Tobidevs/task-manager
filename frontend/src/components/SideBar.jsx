@@ -9,11 +9,11 @@ const SideBar = () => {
         <div className='h-2/5 w-full pl-6 text-2xl flex flex-col gap-5 '>
             <div className='flex items-center'>
                 <MdDashboard />
-                <Link to="/tasks" className='pl-2'>Dashboard</Link>
+                <Link to="/tasks" className='pl-2 text-[#2C2C2C]'>Dashboard</Link>
             </div>
             <div className='flex items-center'>
                 <IoAddCircle/>
-                <Link to="/tasks/createtask" className='pl-2'>Create Task</Link>
+                <Link to="/tasks/createtask" className='pl-2 text-[#2C2C2C]'>Create Task</Link>
             </div>
         </div>
     </div>

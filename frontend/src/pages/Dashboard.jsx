@@ -30,6 +30,15 @@ const Dashboard = () => {
     }
   }
 
+  const handleStatus = (task, status) => {
+    try {
+      axios.patch(`http://localhost:5555/tasks/${task._id}`, { status: status })
+      fetchTasks()
+    } catch(error) {
+      console.error('Error updating Status:', error)
+    }
+  }
+
   const fetchTasks = () => {
     axios.get('http://localhost:5555/tasks')
       .then(res => setTasks(res.data.data)) 
@@ -73,8 +82,8 @@ const Dashboard = () => {
               <div className='h-11/12 w-full pr-5 pl-5 flex flex-col gap-4'>
                 {
                   tasks && tasks.map(task => (
-                    <TaskCard task={task} onTagDelete={handleTagDelete} key={task._id} onEdit={() => openEditModal(task)} />
-                  )) 
+                    <TaskCard task={task} onTagDelete={handleTagDelete} key={task._id} onEdit={() => openEditModal(task)} changeStatus={handleStatus} />
+                  ))
                 }
               </div>
             </div>

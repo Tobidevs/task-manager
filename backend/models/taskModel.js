@@ -9,6 +9,9 @@ const taskSchema = mongoose.Schema(
         description: {
             type: String
         },
+        status: {
+            type: String
+        },
         tags: {
             type: [String],
             default: []
