@@ -4,7 +4,7 @@ import SideBar from "../components/SideBar";
 import TaskCard from "../components/TaskCard";
 import EditTaskModal from "../components/EditTaskModal";
 import axios from "axios";
- // todo responsive design
+// todo responsive design
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
@@ -24,16 +24,22 @@ const Dashboard = () => {
   };
 
   const populateStatuses = () => {
-    tasks.forEach((task) => {
-      console.log(task.status);
-      if (task.status === 'incomplete') {
-        setIncomplete(prev => [...prev, task]);
-      } else if (task.status === 'in progress') {
-        setInProgress(prev => [...prev, task])
-      } else if (task.status === 'completed') {
-        setCompleted(prev => [...prev, task])
-      }
-    });
+    const incompleteTasks = tasks.filter(task => task.status === 'incomplete');
+    setIncomplete(incompleteTasks)
+    const inProgressTasks = tasks.filter(task => task.status === 'in progress');
+    setInProgress(inProgressTasks);
+    const completedTasks = tasks.filter(task => task.status === 'completed')
+    setCompleted(completedTasks)
+    // tasks.forEach((task) => {
+    //   console.log(task.status);
+    //   if (task.status === "incomplete") {
+    //     setIncomplete((prev) => [...prev, task]);
+    //   } else if (task.status === "in progress") {
+    //     setInProgress((prev) => [...prev, task]);
+    //   } else if (task.status === "completed") {
+    //     setCompleted((prev) => [...prev, task]);
+    //   }
+    // });
   };
 
   const handleDelete = (task) => {
@@ -46,9 +52,9 @@ const Dashboard = () => {
     }
   };
 
-  const handleStatus = (task, status) => {
+  const handleStatus = async (task, status) => {
     try {
-      axios.patch(`http://localhost:5555/tasks/${task._id}`, {
+      await axios.patch(`http://localhost:5555/tasks/${task._id}`, {
         status: status,
       });
       fetchTasks();
@@ -58,13 +64,13 @@ const Dashboard = () => {
   };
 
   const fetchTasks = async () => {
-  try {
-    const res = await axios.get("http://localhost:5555/tasks");
-    setTasks(res.data.data);
-  } catch (err) {
-    console.error(err);
-  }
-};
+    try {
+      const res = await axios.get("http://localhost:5555/tasks");
+      setTasks(res.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleTagDelete = async (newTags, taskId) => {
     try {
@@ -82,8 +88,8 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-  populateStatuses();
-}, [tasks]);
+    populateStatuses();
+  }, [tasks]);
 
   return (
     <div className="bg-[#F0F4FF] h-screen w-screen">
@@ -111,16 +117,21 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="h-11/12 w-full pr-5 pl-5 flex flex-col gap-4">
-                {tasks &&
-                  tasks.map((task) => (
+                {incomplete && incomplete.length > 0 ? (
+                  incomplete.map((task) => (
                     <TaskCard
+                      key={task._id}
                       task={task}
                       onTagDelete={handleTagDelete}
-                      key={task._id}
                       onEdit={() => openEditModal(task)}
                       changeStatus={handleStatus}
                     />
-                  ))}
+                  ))
+                ) : (
+                  <div className="flex justify-center items-center">
+                    <p className="text-xl text-gray-500">No tasks</p>
+                  </div>
+                )}
               </div>
             </div>
             <div className="bg-[#F6F9FF] h-full w-3/10 rounded-3xl border-1 border-[#D3D8DE]">
@@ -130,7 +141,23 @@ const Dashboard = () => {
                   <div className="font-medium">In progress</div>
                 </div>
               </div>
-              <div className="h-11/12 w-full "></div>
+              <div className="h-11/12 w-full pr-5 pl-5 flex flex-col gap-4">
+                {inProgress && inProgress.length > 0 ? (
+                  inProgress.map((task) => (
+                    <TaskCard
+                      key={task._id}
+                      task={task}
+                      onTagDelete={handleTagDelete}
+                      onEdit={() => openEditModal(task)}
+                      changeStatus={handleStatus}
+                    />
+                  ))
+                ) : (
+                  <div className="flex justify-center items-center">
+                    <p className="text-xl text-gray-500">No tasks</p>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="bg-[#F6F9FF] h-full w-3/10 rounded-3xl border-1 border-[#D3D8DE]">
               <div className="h-14 w-full flex justify-center items-center">
@@ -139,7 +166,23 @@ const Dashboard = () => {
                   <div className="font-medium">Completed</div>
                 </div>
               </div>
-              <div className="h-11/12 w-full "></div>
+              <div className="h-11/12 w-full pr-5 pl-5 flex flex-col gap-4">
+                {completed && completed.length > 0 ? (
+                  completed.map((task) => (
+                    <TaskCard
+                      key={task._id}
+                      task={task}
+                      onTagDelete={handleTagDelete}
+                      onEdit={() => openEditModal(task)}
+                      changeStatus={handleStatus}
+                    />
+                  ))
+                ) : (
+                  <div className="flex justify-center items-center">
+                    <p className="text-xl text-gray-500">No tasks</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

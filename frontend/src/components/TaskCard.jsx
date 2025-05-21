@@ -35,7 +35,7 @@ const TaskCard = ({ task, onTagDelete, onEdit, changeStatus }) => {
           </button>
           <div className="relative group inline-block">
             <div className="rounded-full h-4 w-4 bg-[#6F6F6F] mr-2 cursor-pointer"></div>
-            <div className="border bg-[#F0F4FF] hidden group-hover:block absolute border-[#D3D8DE] rounded-2xl pl-2 pt-1 pb-3 pr-2">
+            <div className="border bg-[#F0F4FF] hidden group-hover:block absolute border-[#D3D8DE] rounded-2xl pl-2 pt-1 pb-3 pr-2 z-50">
               <label className="text-sm text-gray-500">Set Status</label>
               <div
                 className="flex items-center pr-3 pl-3 cursor-pointer"
