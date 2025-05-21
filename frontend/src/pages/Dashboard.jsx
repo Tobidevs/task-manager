@@ -4,7 +4,7 @@ import SideBar from "../components/SideBar";
 import TaskCard from "../components/TaskCard";
 import EditTaskModal from "../components/EditTaskModal";
 import axios from "axios";
-// todo responsive design
+
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
@@ -24,22 +24,16 @@ const Dashboard = () => {
   };
 
   const populateStatuses = () => {
-    const incompleteTasks = tasks.filter(task => task.status === 'incomplete');
-    setIncomplete(incompleteTasks)
-    const inProgressTasks = tasks.filter(task => task.status === 'in progress');
+    const incompleteTasks = tasks.filter(
+      (task) => task.status === "incomplete"
+    );
+    setIncomplete(incompleteTasks);
+    const inProgressTasks = tasks.filter(
+      (task) => task.status === "in progress"
+    );
     setInProgress(inProgressTasks);
-    const completedTasks = tasks.filter(task => task.status === 'completed')
-    setCompleted(completedTasks)
-    // tasks.forEach((task) => {
-    //   console.log(task.status);
-    //   if (task.status === "incomplete") {
-    //     setIncomplete((prev) => [...prev, task]);
-    //   } else if (task.status === "in progress") {
-    //     setInProgress((prev) => [...prev, task]);
-    //   } else if (task.status === "completed") {
-    //     setCompleted((prev) => [...prev, task]);
-    //   }
-    // });
+    const completedTasks = tasks.filter((task) => task.status === "completed");
+    setCompleted(completedTasks);
   };
 
   const handleDelete = (task) => {

@@ -26,7 +26,6 @@ const TaskForm = () => {
                 description: description,
                 tags: tags
             })
-            console.log('Success:', response.data)
             setName('')
             setDescription('')
             setTags([])

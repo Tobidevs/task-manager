@@ -8,11 +8,11 @@ const SideBar = () => {
     <div className='h-full w-1/7 bg-[#F6F9FF] border-r-1 border-[#D3D8DE] flex justify-center items-center'>
         <div className='h-2/5 w-full pl-6 text-2xl flex flex-col gap-5 '>
             <div className='flex items-center'>
-                <MdDashboard />
+                <MdDashboard className='hidden md:block'/>
                 <Link to="/tasks" className='pl-2 text-[#2C2C2C]'>Dashboard</Link>
             </div>
             <div className='flex items-center'>
-                <IoAddCircle/>
+                <IoAddCircle className='hidden md:block'/>
                 <Link to="/tasks/createtask" className='pl-2 text-[#2C2C2C]'>Create Task</Link>
             </div>
         </div>
