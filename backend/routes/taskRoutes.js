@@ -47,6 +47,9 @@ taskRouter.patch('/:id', getTask, async (req, res, next) => {
     if (req.body.description != null) {
         res.task.description = req.body.description
     }
+    if (req.body.status != null) {
+        res.task.status = req.body.status
+    }
     if (req.body.tags != null) {
         res.task.tags = req.body.tags
     }
