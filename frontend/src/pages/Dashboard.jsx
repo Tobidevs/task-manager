@@ -36,9 +36,9 @@ const Dashboard = () => {
     setCompleted(completedTasks);
   };
 
-  const handleDelete = (task) => {
+  const handleDelete = async (task) => {
     try {
-      axios.delete(`http://localhost:5555/tasks/${task._id}`);
+      await axios.delete(`http://localhost:5555/tasks/${task._id}`);
       closeEditModal();
       fetchTasks();
     } catch (error) {
