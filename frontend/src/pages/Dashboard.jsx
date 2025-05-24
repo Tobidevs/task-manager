@@ -4,6 +4,7 @@ import SideBar from "../components/SideBar";
 import TaskCard from "../components/TaskCard";
 import EditTaskModal from "../components/EditTaskModal";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -38,7 +39,7 @@ const Dashboard = () => {
 
   const handleDelete = async (task) => {
     try {
-      await axios.delete(`http://localhost:5555/tasks/${task._id}`);
+      await axios.delete(`${apiUrl}/tasks/${task._id}`);
       closeEditModal();
       fetchTasks();
     } catch (error) {
@@ -48,7 +49,7 @@ const Dashboard = () => {
 
   const handleStatus = async (task, status) => {
     try {
-      await axios.patch(`http://localhost:5555/tasks/${task._id}`, {
+      await axios.patch(`${apiUrl}/tasks/${task._id}`, {
         status: status,
       });
       fetchTasks();
@@ -59,7 +60,7 @@ const Dashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:5555/tasks");
+      const res = await axios.get(`${apiUrl}/tasks`);
       setTasks(res.data.data);
     } catch (err) {
       console.error(err);
@@ -68,7 +69,7 @@ const Dashboard = () => {
 
   const handleTagDelete = async (newTags, taskId) => {
     try {
-      await axios.patch(`http://localhost:5555/tasks/${taskId}`, {
+      await axios.patch(`${apiUrl}/tasks/${taskId}`, {
         tags: newTags,
       });
       fetchTasks();

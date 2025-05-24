@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Tag from "./Tag";
 import { IoMenu } from "react-icons/io5";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const EditTaskModal = ({ task, onClose, onUpdate, onDelete }) => {
   const [name, setName] = useState(task.name);
@@ -20,7 +21,7 @@ const EditTaskModal = ({ task, onClose, onUpdate, onDelete }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:5555/tasks/${task._id}`, {
+      await axios.patch(`${apiUrl}/tasks/${task._id}`, {
         name: name,
         description: description,
         tags: tags,

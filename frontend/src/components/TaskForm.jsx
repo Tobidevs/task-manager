@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import axios from "axios";
 import Tag from "./Tag";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const TaskForm = () => {
   const [name, setName] = useState("");
@@ -21,7 +22,7 @@ const TaskForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5555/tasks", {
+      const response = await axios.post(`${apiUrl}/tasks`, {
         name: name,
         description: description,
         tags: tags,
