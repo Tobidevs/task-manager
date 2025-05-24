@@ -21,6 +21,7 @@ const TaskForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(apiUrl)
     try {
       const response = await axios.post(`${apiUrl}/tasks`, {
         name: name,

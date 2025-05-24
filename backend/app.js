@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Allow requests from frontend
 app.use(cors({
-  origin: 'http://task-manager-pi-puce.vercel.app/'
+  origin: 'https://task-manager-mzq3rk1qf-tobidevs-projects.vercel.app'
 }));
 
 // API routes
