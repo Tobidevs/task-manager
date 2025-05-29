@@ -11,10 +11,22 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// Allow requests from frontend
-app.use(cors({
-  origin: 'https://task-manager-mzq3rk1qf-tobidevs-projects.vercel.app'
-}));
+const allowedOrigins = [
+  'http://localhost:5173', // Vite local dev
+  'https://task-manager-mzq3rk1qf-tobidevs-projects.vercel.app' // Vercel frontend
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
 
 // API routes
 app.use('/tasks', taskRouter);
