@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@theme {
+--text: #0d0d1c;
+--background: #f0f0fa;
+--primary: #504ec6;
+--secondary: #9d9ce2;
+--accent: #5d5bd7;
+}
+
 html,
 body {
   background: #f0f4ff;
